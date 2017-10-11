@@ -21,6 +21,7 @@ def read_music_not(file, mode):
             res.write("\n")
 
     file.close()
+    res.close()
 
 read_music_not("hnr1.txt", "r")
 
