@@ -1,28 +1,25 @@
 def read_music_not(file, mode):
     count = 0
-    count_x = 0
+    has_title = True
     file = open(file, mode)
-    res = open("res.txt", "w")
-    data = file.read().split()
-    for line in data:
-        x = line[2:]
+    result = open("res.txt", "w")
+    for line in file:
+        x = line[2:-1]
         y = " ... "
         if line[:2] == "X:":
-            res.write(x + y)
+            result.write(x + y)
             count += 1
-            count_x = 1
-        elif (line[:2]  == "T:" and count_x == 1):
-            res.write(x +y)
-            count_x = 0
+            has_title = False
+        elif (line[:2]  == "T:" and not has_title):
+            result.write(x +y)
+            has_title = True
         elif (line[:2] == "M:"):
-            res.write(x + y)
+            result.write(x + y)
         elif (line[:2] == "K:"):
-            res.write(x)
-            res.write("\n")
+            result.write(x)
+            result.write("\n")
 
     file.close()
-    res.close()
+    result.close()
 
 read_music_not("hnr1.txt", "r")
-
-
